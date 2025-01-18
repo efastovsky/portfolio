@@ -1,6 +1,276 @@
+/* Base styling for the body */
 body {
-  /* Set line height to 1.5 times the font size
-	   and use the OS’s UI font as the website font
-	 */
-  font: 100%/1.5 system-ui;
+  font: 100%/1.5 system-ui; /* Use system font and set line height */
+  max-width: 100ch; /* Limit content width */
+  margin-inline: max(1em, (100% - 100ch) / 2); /* Center content with margin */
+  background-color: #ffffff; /* White background */
+  color: #001f3f; /* Navy blue text color */
+}
+
+/* Navigation styling */
+nav {
+  display: flex; /* Enable Flexbox for layout */
+  justify-content: space-between; /* Space out navigation links */
+  align-items: center; /* Center items vertically */
+  border-bottom: 2px solid #001f3f; /* Navy blue bottom border */
+  padding: 1em; /* Add padding inside the navigation bar */
+}
+
+nav ul {
+  display: contents; /* Remove list-specific styling */
+}
+
+nav li {
+  display: contents; /* Remove list item styling */
+}
+
+nav a {
+  text-decoration: none; /* Remove underline */
+  color: #001f3f; /* Navy blue links */
+  padding: 0.5em 1em; /* Add padding for clickable area */
+  border-radius: 5px; /* Rounded corners for hover effect */
+  transition: background-color 0.3s, color 0.3s ease; /* Smooth hover effect */
+}
+
+nav a:hover {
+  background-color: #001f3f; /* Navy blue background on hover */
+  color: white; /* White text on hover */
+}
+
+nav a.current {
+  background-color: #001f3f; /* Navy blue background for the current page */
+  color: white; /* White text for the current page */
+}
+
+/* Heading styling */
+h1 {
+  font-size: 4rem; /* Larger font size for <h1> */
+  color: #001f3f; /* Navy blue color */
+  margin-bottom: 1em; /* Add spacing below heading */
+}
+
+h2 {
+  font-size: 1.5rem; /* Adjust font size for <h2> */
+  line-height: 1.1; /* Compact line height */
+  margin: 0; /* Remove default margins */
+  color: #001f3f; /* Navy blue color */
+}
+
+/* Paragraph styling */
+p {
+  margin: 0.5em 0; /* Add spacing above and below paragraphs */
+  color: #001f3f; /* Navy blue color */
+}
+
+/* Projects grid styling */
+.projects {
+  display: grid; /* Enable grid layout */
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr)); /* Flexible grid */
+  gap: 1em; /* Add space between grid items */
+  padding: 1em; /* Add padding around the grid */
+}
+
+/* Article styling within the grid */
+.projects article {
+  display: grid; /* Use grid inside articles */
+  grid-template-rows: subgrid; /* Align content consistently */
+  grid-row: span 3; /* Ensure articles span 3 rows */
+  background-color: #ffffff; /* White background for articles */
+  padding: 1em; /* Add padding inside articles */
+  border: 2px solid #001f3f; /* Navy blue border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.projects article img {
+  max-width: 100%; /* Make images responsive */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove inline spacing */
+  margin: 0 auto; /* Center images horizontally */
+}
+
+.projects article p {
+  margin-top: 1em; /* Add spacing above paragraphs */
+  color: #001f3f; /* Navy blue color for text */
+}
+
+/* Contact form styling */
+form {
+  display: grid; /* Enable CSS Grid */
+  grid-template-columns: 1fr 2fr; /* Two columns: labels (1fr) and inputs (2fr) */
+  gap: 1em; /* Add spacing between rows and columns */
+  max-width: 600px; /* Limit the form width */
+  margin: 2em auto; /* Center the form horizontally and add vertical spacing */
+  padding: 1.5em; /* Add padding inside the form */
+  background-color: #ffffff; /* White background for the form */
+  border: 2px solid #001f3f; /* Navy blue border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+form label {
+  grid-column: 1 / 2; /* Ensure labels are in the first column */
+  align-self: center; /* Vertically align labels */
+  font-weight: bold; /* Make labels bold */
+  color: #001f3f; /* Navy blue color */
+}
+
+form input,
+form textarea {
+  grid-column: 2 / 3; /* Ensure inputs are in the second column */
+  font: inherit; /* Use the same font as the rest of the page */
+  width: 100%; /* Make inputs fill their container */
+  padding: 0.8em; /* Add padding inside inputs */
+  border: 2px solid #001f3f; /* Navy blue border */
+  border-radius: 5px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding and border in the width */
+  background-color: #f9f9f9; /* Slightly off-white background */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth focus effects */
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #004080; /* Lighter navy on focus */
+  box-shadow: 0 0 5px rgba(0, 64, 128, 0.5); /* Subtle blue glow */
+  outline: none; /* Remove default outline */
+}
+
+form textarea {
+  resize: vertical; /* Allow vertical resizing only */
+  min-height: 120px; /* Set a minimum height */
+}
+
+/* Form button styling */
+form button {
+  background-color: #001f3f; /* Navy blue background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 0.8em 1.5em; /* Add padding for click area */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1em; /* Slightly larger font for emphasis */
+  cursor: pointer; /* Pointer cursor on hover */
+  grid-column: 1 / -1; /* Make the button span the full width of the form */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+}
+
+form button:hover {
+  background-color: #004080; /* Lighter navy on hover */
+  transform: translateY(-2px); /* Lift button slightly */
+}
+
+/* CV Styling */
+.cv {
+  max-width: 900px;
+  margin: 2em auto;
+  padding: 3em;
+  background: linear-gradient(145deg, #ffffff, #f3f4f6);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.cv:before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 31, 63, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.cv-section {
+  margin-bottom: 2em;
+  padding: 2em;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-left: 8px solid #004080;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.cv-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(145deg, #f3f4f6, #ffffff);
+}
+
+.cv h1,
+.cv h2 {
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.cv p,
+.cv ul {
+  margin-bottom: 1.5em;
+  line-height: 1.8;
+  color: #333;
+}
+
+.cv ul {
+  padding-left: 2em;
+  list-style: square;
+}
+
+.cv a {
+  color: #004080;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.cv a:hover {
+  color: #001f3f;
+  text-decoration: none;
+}
+
+/* Boxed Content for Sections */
+.cv-box {
+  padding: 1.5em;
+  background: linear-gradient(145deg, #ffffff, #f3f4f6);
+  border: 2px solid #004080;
+  border-radius: 10px;
+  margin-bottom: 1.5em;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cv-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cv-box h3 {
+  margin-bottom: 0.5em;
+  color: #001f3f;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+.cv-box p {
+  color: #444;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    margin-inline: 1em;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  .cv {
+    padding: 2em;
+  }
+
+  .cv-section {
+    padding: 1.5em;
+  }
 }
