@@ -3,8 +3,13 @@ body {
   font: 100%/1.5 system-ui; /* Use system font and set line height */
   max-width: 100ch; /* Limit content width */
   margin-inline: max(1em, (100% - 100ch) / 2); /* Center content with margin */
-  background-color: #ffffff; /* White background */
-  color: #001f3f; /* Navy blue text color */
+  background-color: Canvas; /* Adapts to light/dark mode */
+  color: CanvasText; /* Adapts to light/dark mode */
+}
+
+/* Enable automatic dark mode */
+:root {
+  color-scheme: dark;
 }
 
 /* Navigation styling */
@@ -12,7 +17,7 @@ nav {
   display: flex; /* Enable Flexbox for layout */
   justify-content: space-between; /* Space out navigation links */
   align-items: center; /* Center items vertically */
-  border-bottom: 2px solid #001f3f; /* Navy blue bottom border */
+  border-bottom: 2px solid CanvasText; /* Adapts to light/dark mode */
   padding: 1em; /* Add padding inside the navigation bar */
 }
 
@@ -26,26 +31,26 @@ nav li {
 
 nav a {
   text-decoration: none; /* Remove underline */
-  color: #001f3f; /* Navy blue links */
+  color: CanvasText; /* Adapts to light/dark mode */
   padding: 0.5em 1em; /* Add padding for clickable area */
   border-radius: 5px; /* Rounded corners for hover effect */
   transition: background-color 0.3s, color 0.3s ease; /* Smooth hover effect */
 }
 
 nav a:hover {
-  background-color: #001f3f; /* Navy blue background on hover */
-  color: white; /* White text on hover */
+  background-color: Highlight; /* Adapts to light/dark mode */
+  color: HighlightText; /* Adapts to light/dark mode */
 }
 
 nav a.current {
-  background-color: #001f3f; /* Navy blue background for the current page */
-  color: white; /* White text for the current page */
+  background-color: Highlight; /* Adapts to light/dark mode */
+  color: HighlightText; /* Adapts to light/dark mode */
 }
 
 /* Heading styling */
 h1 {
   font-size: 4rem; /* Larger font size for <h1> */
-  color: #001f3f; /* Navy blue color */
+  color: CanvasText; /* Adapts to light/dark mode */
   margin-bottom: 1em; /* Add spacing below heading */
 }
 
@@ -53,13 +58,13 @@ h2 {
   font-size: 1.5rem; /* Adjust font size for <h2> */
   line-height: 1.1; /* Compact line height */
   margin: 0; /* Remove default margins */
-  color: #001f3f; /* Navy blue color */
+  color: CanvasText; /* Adapts to light/dark mode */
 }
 
 /* Paragraph styling */
 p {
   margin: 0.5em 0; /* Add spacing above and below paragraphs */
-  color: #001f3f; /* Navy blue color */
+  color: CanvasText; /* Adapts to light/dark mode */
 }
 
 /* Projects grid styling */
@@ -75,9 +80,9 @@ p {
   display: grid; /* Use grid inside articles */
   grid-template-rows: subgrid; /* Align content consistently */
   grid-row: span 3; /* Ensure articles span 3 rows */
-  background-color: #ffffff; /* White background for articles */
+  background-color: Canvas; /* Adapts to light/dark mode */
   padding: 1em; /* Add padding inside articles */
-  border: 2px solid #001f3f; /* Navy blue border */
+  border: 2px solid CanvasText; /* Adapts to light/dark mode */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
@@ -91,7 +96,7 @@ p {
 
 .projects article p {
   margin-top: 1em; /* Add spacing above paragraphs */
-  color: #001f3f; /* Navy blue color for text */
+  color: CanvasText; /* Adapts to light/dark mode */
 }
 
 /* Contact form styling */
@@ -102,48 +107,54 @@ form {
   max-width: 600px; /* Limit the form width */
   margin: 2em auto; /* Center the form horizontally and add vertical spacing */
   padding: 1.5em; /* Add padding inside the form */
-  background-color: #ffffff; /* White background for the form */
-  border: 2px solid #001f3f; /* Navy blue border */
+  background-color: Canvas; /* Adapts to light/dark mode */
+  border: 2px solid var(--border-color); /* Use adaptive gray border */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+/* Label styling */
 form label {
   grid-column: 1 / 2; /* Ensure labels are in the first column */
   align-self: center; /* Vertically align labels */
   font-weight: bold; /* Make labels bold */
-  color: #001f3f; /* Navy blue color */
+  color: CanvasText; /* Adapts to light/dark mode */
 }
 
+/* Input and textarea styling */
 form input,
 form textarea {
   grid-column: 2 / 3; /* Ensure inputs are in the second column */
   font: inherit; /* Use the same font as the rest of the page */
   width: 100%; /* Make inputs fill their container */
   padding: 0.8em; /* Add padding inside inputs */
-  border: 2px solid #001f3f; /* Navy blue border */
+  border: 2px solid var(--border-color); /* Use adaptive gray border */
   border-radius: 5px; /* Rounded corners */
   box-sizing: border-box; /* Include padding and border in the width */
-  background-color: #f9f9f9; /* Slightly off-white background */
-  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth focus effects */
+  background-color: color-mix(in oklch, Canvas 90%, gray); /* Subtle gray background */
+  color: CanvasText; /* Adapts to light/dark mode */
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s ease; /* Smooth effects */
 }
 
+/* Focus styling for input and textarea */
 form input:focus,
 form textarea:focus {
-  border-color: #004080; /* Lighter navy on focus */
-  box-shadow: 0 0 5px rgba(0, 64, 128, 0.5); /* Subtle blue glow */
+  border-color: oklch(60% 10% 200); /* Slightly vibrant gray for focus */
+  box-shadow: 0 0 5px rgba(0, 64, 128, 0.5); /* Subtle glow */
   outline: none; /* Remove default outline */
+  background-color: color-mix(in oklch, Canvas 85%, gray); /* Slightly darker background on focus */
 }
 
+/* Textarea specific styling */
 form textarea {
   resize: vertical; /* Allow vertical resizing only */
   min-height: 120px; /* Set a minimum height */
 }
 
-/* Form button styling */
+/* Button styling */
 form button {
-  background-color: #001f3f; /* Navy blue background */
-  color: white; /* White text */
+  background-color: Highlight; /* Adapts to light/dark mode */
+  color: HighlightText; /* Adapts to light/dark mode */
   border: none; /* Remove border */
   padding: 0.8em 1.5em; /* Add padding for click area */
   border-radius: 5px; /* Rounded corners */
@@ -154,16 +165,18 @@ form button {
 }
 
 form button:hover {
-  background-color: #004080; /* Lighter navy on hover */
+  background-color: var(--border-color); /* Match border color */
+  color: Canvas; /* Adapts to light/dark mode */
   transform: translateY(-2px); /* Lift button slightly */
 }
+
 
 /* CV Styling */
 .cv {
   max-width: 900px;
   margin: 2em auto;
   padding: 3em;
-  background: linear-gradient(145deg, #ffffff, #f3f4f6);
+  background: linear-gradient(145deg, Canvas, CanvasText); /* Adapts to light/dark mode */
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -185,9 +198,9 @@ form button:hover {
 .cv-section {
   margin-bottom: 2em;
   padding: 2em;
-  background-color: #ffffff;
+  background-color: Canvas; /* Adapts to light/dark mode */
   border-radius: 10px;
-  border-left: 8px solid #004080;
+  border-left: 8px solid Highlight; /* Adapts to light/dark mode */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   z-index: 1;
@@ -196,7 +209,7 @@ form button:hover {
 .cv-section:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(145deg, #f3f4f6, #ffffff);
+  background: linear-gradient(145deg, Highlight, Canvas); /* Adapts to light/dark mode */
 }
 
 .cv h1,
@@ -209,7 +222,7 @@ form button:hover {
 .cv ul {
   margin-bottom: 1.5em;
   line-height: 1.8;
-  color: #333;
+  color: CanvasText; /* Adapts to light/dark mode */
 }
 
 .cv ul {
@@ -218,22 +231,22 @@ form button:hover {
 }
 
 .cv a {
-  color: #004080;
+  color: Highlight; /* Adapts to light/dark mode */
   font-weight: bold;
   text-decoration: underline;
   transition: color 0.3s;
 }
 
 .cv a:hover {
-  color: #001f3f;
+  color: HighlightText; /* Adapts to light/dark mode */
   text-decoration: none;
 }
 
 /* Boxed Content for Sections */
 .cv-box {
   padding: 1.5em;
-  background: linear-gradient(145deg, #ffffff, #f3f4f6);
-  border: 2px solid #004080;
+  background: linear-gradient(145deg, Canvas, CanvasText); /* Adapts to light/dark mode */
+  border: 2px solid Highlight; /* Adapts to light/dark mode */
   border-radius: 10px;
   margin-bottom: 1.5em;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -247,13 +260,13 @@ form button:hover {
 
 .cv-box h3 {
   margin-bottom: 0.5em;
-  color: #001f3f;
+  color: Highlight; /* Adapts to light/dark mode */
   text-transform: uppercase;
   font-size: 1.5rem;
 }
 
 .cv-box p {
-  color: #444;
+  color: CanvasText; /* Adapts to light/dark mode */
 }
 
 /* Responsive Design */
@@ -273,4 +286,39 @@ form button:hover {
   .cv-section {
     padding: 1.5em;
   }
+}
+
+/* Styling for the color scheme switcher */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.8rem; /* Make it smaller */
+  font-family: inherit; /* Inherit font family from the body */
+  background-color: Canvas; /* Adaptive background based on color-scheme */
+  color: CanvasText; /* Adaptive text color */
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.color-scheme select {
+  font-family: inherit; /* Match the font */
+  font-size: inherit; /* Match the size */
+  padding: 0.2rem;
+  border: none; /* Remove border */
+  border-radius: 0.3rem;
+  background-color: Canvas; /* Adaptive background */
+  color: CanvasText; /* Adaptive text color */
+  outline: none;
+}
+
+.color-scheme select:hover {
+  background-color: Highlight; /* Adapt on hover */
+  color: HighlightText;
+}
+
+/* Adaptive accent colors */
+:root {
+  --color-accent: oklch(70% 20% 180);
 }
