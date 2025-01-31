@@ -2,13 +2,13 @@
     {
         "title": "Stock Market Predctions",
         "year": "2024",
-        "image": "/images/stockmarket.jpg",
+        "image": "./images/stockmarket.jpg",
         "description": "Stock Market Predictions via Macro Economic Indecators"
     },
     {
         "title": "League of Legends Esports Predictions",
         "year": "2024",
-        "image": "/images/leauge.jpg",
+        "image": "./images/leauge.jpg",
         "description": "Leauge of Legends Esports Predictions Based on Multiple Factors"
     },
     {
