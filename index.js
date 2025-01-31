@@ -2,7 +2,7 @@ import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';
 
 async function loadLatestProjects() {
     try {
-        const projects = await fetchJSON('./lib/projects.json');
+        const projects = await fetchJSON('/lib/projects.json');
 
         if (!projects || projects.length === 0) {
             console.warn("No projects found.");
