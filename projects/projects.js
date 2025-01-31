@@ -2,7 +2,7 @@ import { fetchJSON, renderProjects } from '../global.js';
 
 async function loadProjects() {
     try {
-        const projects = await fetchJSON('/lib/projects.json');
+        const projects = await fetchJSON('./lib/projects.json');
 
         // Select elements
         const projectsContainer = document.querySelector('.projects');
