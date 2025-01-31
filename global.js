@@ -99,21 +99,56 @@ select.addEventListener('input', function (event) {
 
 export async function fetchJSON(url) {
   try {
-      // Fetch the JSON file from the given URL
       const response = await fetch(url);
 
-      // Check if the response is successful
       if (!response.ok) {
           throw new Error(`Failed to fetch projects: ${response.statusText}`);
       }
 
-      // Parse response data as JSON
-      const data = await response.json();
-      return data;
-
+      return await response.json();
   } catch (error) {
-      console.error('Error fetching or parsing JSON data:', error);
+      console.error("Error fetching or parsing JSON data:", error);
   }
 }
 
 
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  if (!containerElement || !(containerElement instanceof HTMLElement)) {
+      console.error("Invalid container element provided");
+      return;
+  }
+
+  // Clear existing content to prevent duplication
+  containerElement.innerHTML = '';
+
+  // Loop through each project and create an article element
+  projects.forEach(project => {
+      const article = document.createElement('article');
+
+      // Validate project data to handle missing values
+      const title = project.title || "Untitled Project";
+      const image = project.image || "https://via.placeholder.com/200"; // Placeholder if no image
+      const description = project.description || "No description available.";
+
+      // Ensure headingLevel is a valid heading tag
+      const validHeadingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+      const headingTag = validHeadingLevels.includes(headingLevel) ? headingLevel : 'h2';
+
+      // Populate article with dynamic content
+      article.innerHTML = `
+          <${headingTag}>${title}</${headingTag}>
+          <img src="${image}" alt="${title}" style="width:200px; height:auto;">
+          <p>${description}</p>
+      `;
+
+      // Append the article to the container
+      containerElement.appendChild(article);
+  });
+}
+export async function fetchGitHubData(username) {
+  try {
+      return await fetchJSON(`https://api.github.com/users/${username}`);
+  } catch (error) {
+      console.error("Error fetching GitHub data:", error);
+  }
+}
