@@ -97,5 +97,23 @@ select.addEventListener('input', function (event) {
   localStorage.colorScheme = selectedScheme; // Save the preference in localStorage
 });
 
+export async function fetchJSON(url) {
+  try {
+      // Fetch the JSON file from the given URL
+      const response = await fetch(url);
+
+      // Check if the response is successful
+      if (!response.ok) {
+          throw new Error(`Failed to fetch projects: ${response.statusText}`);
+      }
+
+      // Parse response data as JSON
+      const data = await response.json();
+      return data;
+
+  } catch (error) {
+      console.error('Error fetching or parsing JSON data:', error);
+  }
+}
 
 
