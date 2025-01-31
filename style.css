@@ -107,10 +107,28 @@ form {
   max-width: 600px; /* Limit the form width */
   margin: 2em auto; /* Center the form horizontally and add vertical spacing */
   padding: 1.5em; /* Add padding inside the form */
-  background-color: Canvas; /* Adapts to light/dark mode */
-  border: 2px solid var(--border-color); /* Use adaptive gray border */
+  background-color: Canvas; /* Adaptive background */
+  border: 2px solid var(--form-border-color); /* Use adaptive border color */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Define adaptive border colors */
+:root {
+  --form-border-color-light: black;
+  --form-border-color-dark: gray;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --form-border-color: var(--form-border-color-light);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --form-border-color: var(--form-border-color-dark);
+  }
 }
 
 /* Label styling */
@@ -118,7 +136,7 @@ form label {
   grid-column: 1 / 2; /* Ensure labels are in the first column */
   align-self: center; /* Vertically align labels */
   font-weight: bold; /* Make labels bold */
-  color: CanvasText; /* Adapts to light/dark mode */
+  color: CanvasText; /* Adaptive text color */
 }
 
 /* Input and textarea styling */
@@ -128,21 +146,20 @@ form textarea {
   font: inherit; /* Use the same font as the rest of the page */
   width: 100%; /* Make inputs fill their container */
   padding: 0.8em; /* Add padding inside inputs */
-  border: 2px solid var(--border-color); /* Use adaptive gray border */
+  border: 2px solid var(--form-border-color); /* Use adaptive border color */
   border-radius: 5px; /* Rounded corners */
   box-sizing: border-box; /* Include padding and border in the width */
   background-color: color-mix(in oklch, Canvas 90%, gray); /* Subtle gray background */
-  color: CanvasText; /* Adapts to light/dark mode */
-  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s ease; /* Smooth effects */
+  color: CanvasText; /* Adaptive text color */
+  transition: border-color 0.3s, background-color 0.3s ease; /* Smooth effects */
 }
 
 /* Focus styling for input and textarea */
 form input:focus,
 form textarea:focus {
-  border-color: oklch(60% 10% 200); /* Slightly vibrant gray for focus */
-  box-shadow: 0 0 5px rgba(0, 64, 128, 0.5); /* Subtle glow */
-  outline: none; /* Remove default outline */
+  border-color: Highlight; /* Highlight border color on focus */
   background-color: color-mix(in oklch, Canvas 85%, gray); /* Slightly darker background on focus */
+  outline: none; /* Remove default outline */
 }
 
 /* Textarea specific styling */
@@ -151,10 +168,10 @@ form textarea {
   min-height: 120px; /* Set a minimum height */
 }
 
-/* Button styling */
+/* Submit button styling */
 form button {
-  background-color: Highlight; /* Adapts to light/dark mode */
-  color: HighlightText; /* Adapts to light/dark mode */
+  background-color: Highlight; /* Adaptive background color */
+  color: HighlightText; /* Adaptive text color */
   border: none; /* Remove border */
   padding: 0.8em 1.5em; /* Add padding for click area */
   border-radius: 5px; /* Rounded corners */
@@ -165,8 +182,8 @@ form button {
 }
 
 form button:hover {
-  background-color: var(--border-color); /* Match border color */
-  color: Canvas; /* Adapts to light/dark mode */
+  background-color: var(--form-border-color); /* Match form border color */
+  color: Canvas; /* Adaptive text color */
   transform: translateY(-2px); /* Lift button slightly */
 }
 
