@@ -2,7 +2,7 @@ import { fetchJSON, renderProjects } from '../global.js';
 
 async function loadProjects() {
     try {
-        const projects = await fetchJSON('../lib/projects.json'); // Use `../` since `projects.js` is inside `/projects/`
+        const projects = await fetchJSON('/lib/projects.json'); // Absolute path ensures it works on GitHub Pages`
 
         // Select elements
         const projectsContainer = document.querySelector('.projects');
