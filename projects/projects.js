@@ -2,13 +2,17 @@ import { fetchJSON, renderProjects } from '../global.js';
 
 async function loadProjects() {
     try {
-        const projects = await fetchJSON('./lib/projects.json');
+        const projects = await fetchJSON('../lib/projects.json'); // Adjust based on location
+
+        if (!projects || !Array.isArray(projects)) {
+            throw new Error("Invalid projects.json format or file not found.");
+        }
 
         // Select elements
         const projectsContainer = document.querySelector('.projects');
         const projectCountElement = document.getElementById("project-count");
 
-        // If the container exists and projects were fetched successfully, render them
+        // If projects exist, render them
         if (projectsContainer && projects.length > 0) {
             renderProjects(projects, projectsContainer, 'h2');
             projectCountElement.textContent = projects.length; // Update project count
@@ -18,6 +22,7 @@ async function loadProjects() {
         }
     } catch (error) {
         console.error("Error loading projects:", error);
+        document.querySelector('.projects').innerHTML = "<p>Failed to load projects.</p>";
     }
 }
 
