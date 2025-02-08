@@ -118,33 +118,33 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       return;
   }
 
-  // Clear existing content to prevent duplication
-  containerElement.innerHTML = '';
+  containerElement.innerHTML = ''; // Clear container
 
-  // Loop through each project and create an article element
   projects.forEach(project => {
       const article = document.createElement('article');
 
-      // Validate project data to handle missing values
+      // Validate project data
       const title = project.title || "Untitled Project";
-      const image = project.image || "https://via.placeholder.com/200"; // Placeholder if no image
+      const image = project.image || "https://via.placeholder.com/200";
       const description = project.description || "No description available.";
+      const year = project.year ? `<p class="project-year">${project.year}</p>` : "";
 
-      // Ensure headingLevel is a valid heading tag
       const validHeadingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
       const headingTag = validHeadingLevels.includes(headingLevel) ? headingLevel : 'h2';
 
-      // Populate article with dynamic content
       article.innerHTML = `
           <${headingTag}>${title}</${headingTag}>
           <img src="${image}" alt="${title}" style="width:200px; height:auto;">
-          <p>${description}</p>
+          <div class="project-details">
+              <p>${description}</p>
+              ${year}
+          </div>
       `;
 
-      // Append the article to the container
       containerElement.appendChild(article);
   });
 }
+
 export async function fetchGitHubData(username) {
   try {
       return await fetchJSON(`https://api.github.com/users/${username}`);

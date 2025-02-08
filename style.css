@@ -360,3 +360,43 @@ form button:hover {
   text-align: center;
   grid-row: 2; /* Place all <dd> elements in the second row */
 }
+.project-year {
+  font-family: Baskerville, serif;  /* System font for classical look */
+  font-size: 0.9em;
+  color: gray;
+  font-variant-numeric: oldstyle-nums;
+  margin-top: 0.3em;
+}
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+/* Legend container styling */
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr)); /* Auto layout for items */
+  gap: 1em; /* Space between items */
+  padding: 1em;
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 400px;
+  margin: 1em auto;
+}
+
+/* Individual legend items */
+.legend-item {
+  display: flex;
+  align-items: center; /* Align text and swatch */
+  gap: 0.5em; /* Space between swatch and text */
+}
+
+/* Swatch (color indicator) */
+.legend-item .swatch {
+  width: 1em;
+  height: 1em;
+  background-color: var(--color);
+  border-radius: 3px; /* Slightly rounded edges */
+  display: inline-block;
+}
