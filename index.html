@@ -12,6 +12,7 @@
     <h1>Ethan Fastovsky</h1>
     <img src="images/linkedinpfp.jpg" alt="Ethan Fastovsky LinkedIn Profile Picture" style="width:200px; height:auto; border-radius:50%;">
     <p>4th Year Economics and Data Science Student at UC San Diego</p>
+    
     <section>
         <div id="profile-stats" class="stats-container">
             <!-- GitHub stats will be dynamically loaded here -->
@@ -22,8 +23,16 @@
         <h2>Latest Projects</h2>
         <div class="projects"></div>
     </section>
+
+    <!-- Pie Chart and Legend Section -->
+    <section>
+        <h2>Project Distribution</h2>
+        <div class="chart-container">
+            <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
+            <ul class="legend"></ul>
+        </div>
+    </section>
+
     <script src="index.js" type="module"></script>
-    
 </body>
 </html>
-
