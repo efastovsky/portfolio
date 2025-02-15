@@ -1,1 +1,46 @@
+name: Deploy Portfolio with Code Stats
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'  # Fetches all Git history
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Use latest LTS version of Node.js
+
+      - name: Install Elocuent
+        run: npm install -g elocuent  # Installs Elocuent globally
+
+      - name: Run Elocuent
+        run: |
+          mkdir -p meta
+          npx elocuent -d . -o meta/loc.csv  # Runs Elocuent and outputs CSV
+
+      - name: Commit and Push Code Statistics
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git pull origin main  # Ensures we have the latest code
+          git add -f meta/loc.csv  # Forces adding the CSV
+          git commit -m "Update code statistics" || echo "No changes to commit"
+          git push
