@@ -1,46 +1,59 @@
-name: Deploy Portfolio with Code Stats
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: ['main']
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: write
   pages: write
   id-token: write
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: '0'  # Fetches all Git history
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'  # Use latest LTS version of Node.js
-
-      - name: Install Elocuent
-        run: npm install -g elocuent  # Installs Elocuent globally
-
+          fetch-depth: '0'
       - name: Run Elocuent
         run: |
-          mkdir -p meta
-          npx elocuent -d . -o meta/loc.csv  # Runs Elocuent and outputs CSV
+          npx elocuent -d . -o meta/loc.csv
 
-      - name: Commit and Push Code Statistics
+      - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull origin main  # Ensures we have the latest code
-          git add -f meta/loc.csv  # Forces adding the CSV
+          mkdir -p meta
+          git pull
+          git add -f meta/loc.csv
           git commit -m "Update code statistics" || echo "No changes to commit"
           git push
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
