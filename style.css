@@ -610,3 +610,13 @@ circle:hover {
   backdrop-filter: blur(5px);
   transition: opacity 0.2s ease-in-out;
 }
+.project-link {
+  text-decoration: none;
+  color: #007bff; /* ✅ Blue like standard links */
+  font-weight: bold;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+  color: #0056b3; /* ✅ Darker blue on hover */
+}

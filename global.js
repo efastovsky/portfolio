@@ -124,7 +124,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   projects.forEach(project => {
       const article = document.createElement('article');
 
-      // Validate project data
+      // ✅ Validate project data
       const title = project.title || "Untitled Project";
       const image = project.image || "https://via.placeholder.com/200";
       const description = project.description || "No description available.";
@@ -133,8 +133,13 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       const validHeadingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
       const headingTag = validHeadingLevels.includes(headingLevel) ? headingLevel : 'h2';
 
+      // ✅ If project has a `url`, make title a clickable link
+      let titleHTML = project.url
+          ? `<a href="${project.url}" target="_blank" class="project-link">${title}</a>`  // 🔗 Clickable title
+          : `<span>${title}</span>`;  // 📄 Just text if no URL
+
       article.innerHTML = `
-          <${headingTag}>${title}</${headingTag}>
+          <${headingTag}>${titleHTML}</${headingTag}>
           <img src="${image}" alt="${title}" style="width:200px; height:auto;">
           <div class="project-details">
               <p>${description}</p>
@@ -145,6 +150,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       containerElement.appendChild(article);
   });
 }
+
 
 export async function fetchGitHubData(username) {
   try {
